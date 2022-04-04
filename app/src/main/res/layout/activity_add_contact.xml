@@ -48,7 +48,6 @@
             android:text="Contact Number: "
             tools:ignore="HardcodedText" />
 
-
         <EditText
             android:id="@+id/eTContactNumber"
             android:layout_width="match_parent"
@@ -60,6 +59,13 @@
 
 
     </LinearLayout>
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
 
 
 </LinearLayout>
