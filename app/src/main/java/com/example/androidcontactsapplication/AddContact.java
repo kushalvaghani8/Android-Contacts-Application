@@ -1,14 +1,10 @@
 package com.example.androidcontactsapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,13 +19,14 @@ public class AddContact extends AppCompatActivity {
     EditText mName, mContactNumber;
     Button mSaveButton;
     SharedPreferences sharedPreferences;
-    ArrayList<ContactList> contactList;
+    ArrayList<Contact> contactList;
+    DataHandler DataHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
-
+        DataHandler = DataHandler.getInstance(getApplicationContext());
         mName = findViewById(R.id.eTName);
         mContactNumber = findViewById(R.id.eTContactNumber);
         mSaveButton = findViewById(R.id.saveButton);
@@ -49,16 +46,15 @@ public class AddContact extends AppCompatActivity {
     private void saveData(){
         String name = mName.getText().toString();
         int number = Integer.parseInt(mContactNumber.getText().toString());
+        Contact newItem = new Contact(name, number);
 
-        ContactList newItem = new ContactList(name, number);
+        DataHandler.AddContact(newItem);
 
-        contactList.add(newItem);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(contactList);
-        editor.putString("cList", json);
-        editor.apply();
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(contactList);
+//        editor.putString("cList", json);
+//        editor.apply();
 
         Toast.makeText(AddContact.this, "Contact Saved", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AddContact.this, MainActivity.class);

@@ -16,12 +16,12 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
-    ArrayList<ContactList> mContactList;
+    DataHandler DataHandler;
+    ArrayList<Contact> mContactList;
     SharedPreferences sharedPreferences;
     ListAdapter mListAdapter;
 
@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadData();
+        DataHandler = DataHandler.getInstance(getApplicationContext());
 
         mListView = (ListView) findViewById(R.id.listView);
-        mListAdapter = new ListAdapter(this, mContactList);
+        mListAdapter = new ListAdapter(this);
         mListView.setAdapter(mListAdapter);
     }
 
@@ -70,23 +70,4 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-    public void loadData(){
-        sharedPreferences = getSharedPreferences("SHARED_PREF", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("cList", null);
-        Type type = new TypeToken<ArrayList<ContactList>>(){}.getType();
-        mContactList = gson.fromJson(json, type);
-
-        if (mContactList == null){
-            mContactList = new ArrayList<>();
-        }
-
-
-       // editor.putString("cList", json);
-    }
-
-
-
 }
