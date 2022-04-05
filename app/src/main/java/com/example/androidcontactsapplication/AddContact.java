@@ -14,13 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
 public class AddContact extends AppCompatActivity {
 
     EditText mName, mContactNumber;
     Button mSaveButton;
     SharedPreferences sharedPreferences;
-
-
+    ArrayList<ContactList> contactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +40,34 @@ public class AddContact extends AppCompatActivity {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String name = mName.getText().toString();
-                int number = Integer.parseInt(mContactNumber.getText().toString());
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("Name", name);
-                editor.putInt("NUMBER", number );
-
-                Toast.makeText(AddContact.this, "Contact Saved", Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(AddContact.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-
+                saveData();
             }
         });
-
     }
+
+    //
+    private void saveData(){
+        String name = mName.getText().toString();
+        int number = Integer.parseInt(mContactNumber.getText().toString());
+
+        ContactList newItem = new ContactList(name, number);
+
+        contactList.add(newItem);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(contactList);
+        editor.putString("cList", json);
+        editor.apply();
+
+        Toast.makeText(AddContact.this, "Contact Saved", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(AddContact.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+
 
     /*_________________________________________
 
