@@ -3,12 +3,14 @@ package com.example.androidcontactsapplication;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Contact implements Parcelable {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
 
     private String mName;
-    private int mContact;
+    private String mContact;
 
-    public Contact(String name, int contact) {
+    public Contact(String name, String contact) {
         mName = name;
         mContact = contact;
     }
@@ -17,36 +19,11 @@ public class Contact implements Parcelable {
         return mName;
     }
 
-    public int getmContact() {
+    public String getmContact() {
         return mContact;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(mName);
-        parcel.writeInt(mContact);
-    }
-
-    public static final Parcelable.Creator<DataHandler> CREATOR = new Parcelable.Creator<DataHandler>() {
-        public DataHandler createFromParcel(Parcel in) {
-            return new DataHandler(in);
-        }
-        public DataHandler[] newArray(int size) {
-            return new DataHandler[size];
-        }
-    };
-
-    // used by the creator above
-    private Contact(Parcel in) {
-        mName = in.readString();
-        mContact = in.readInt();
-
-    }
 
 }
 

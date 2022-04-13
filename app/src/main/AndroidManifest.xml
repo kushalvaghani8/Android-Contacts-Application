@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidContactsApplication">
         <activity
-            android:name=".AddContact"
+            android:name=".EditContact"
             android:exported="false"
             android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".AddContact"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

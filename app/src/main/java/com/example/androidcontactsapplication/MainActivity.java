@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     ListAdapter mListAdapter;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
-
-
     }
 
       /*_________________________________________
@@ -65,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentAdd = new Intent(this, AddContact.class);
                 startActivity(intentAdd);
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }

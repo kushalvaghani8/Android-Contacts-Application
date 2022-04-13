@@ -18,8 +18,6 @@ public class AddContact extends AppCompatActivity {
 
     EditText mName, mContactNumber;
     Button mSaveButton;
-    SharedPreferences sharedPreferences;
-    ArrayList<Contact> contactList;
     DataHandler DataHandler;
 
     @Override
@@ -31,7 +29,6 @@ public class AddContact extends AppCompatActivity {
         mContactNumber = findViewById(R.id.eTContactNumber);
         mSaveButton = findViewById(R.id.saveButton);
 
-        sharedPreferences = getSharedPreferences("SHARED_PREF", MODE_PRIVATE);
 
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -45,16 +42,10 @@ public class AddContact extends AppCompatActivity {
     //
     private void saveData(){
         String name = mName.getText().toString();
-        int number = Integer.parseInt(mContactNumber.getText().toString());
+        String number = mContactNumber.getText().toString();
         Contact newItem = new Contact(name, number);
-
         DataHandler.AddContact(newItem);
 
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        Gson gson = new Gson();
-//        String json = gson.toJson(contactList);
-//        editor.putString("cList", json);
-//        editor.apply();
 
         Toast.makeText(AddContact.this, "Contact Saved", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(AddContact.this, MainActivity.class);

@@ -42,10 +42,6 @@ public class DataHandler {
         return ourInstance;
     }
 
-//    public ArrayList<Contact> GetContactList(){
-//
-//    }
-
     public void AddContact (Contact contact){
 
         ArrayList<Contact> contactList;
@@ -62,17 +58,53 @@ public class DataHandler {
 
     }
 
+    public ArrayList<Contact> EditContact (int position, Contact contact) {
+
+        sharedPreferences = context.getSharedPreferences("SHARED_PREF",Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("cList", null);
+        Type type = new TypeToken<ArrayList<Contact>>(){}.getType();
+        contactList = gson.fromJson(json, type);
+        contactList.set(position, contact);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String jSon = gson.toJson(contactList);
+        editor.putString("cList", jSon);
+        editor.apply();
+
+        if (contactList == null){
+            contactList = new ArrayList<>();
+        }
+        return contactList;
+    }
+
+    public ArrayList<Contact> DeleteContact (int position) {
+
+        sharedPreferences = context.getSharedPreferences("SHARED_PREF",Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("cList", null);
+        Type type = new TypeToken<ArrayList<Contact>>(){}.getType();
+        contactList = gson.fromJson(json, type);
+        contactList.remove(position);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String jSon = gson.toJson(contactList);
+        editor.putString("cList", jSon);
+        editor.apply();
+
+        if (contactList == null){
+            contactList = new ArrayList<>();
+        }
+        return contactList;
+    }
+
+
+
 
     public SharedPreferences getPreferences(){
         return prefs;
     }
 
-//    public void setText(String editValue) {
-//        this.Contact = editValue;
-//    }
-//    public String getText() {
-//        return Contact;
-//    }
 
     public ArrayList<Contact> getContactList(){
 
