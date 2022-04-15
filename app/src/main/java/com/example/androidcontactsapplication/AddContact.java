@@ -16,16 +16,17 @@ import java.util.ArrayList;
 
 public class AddContact extends AppCompatActivity {
 
-    EditText mName, mContactNumber;
+    EditText mName, mContactNumber; //declaring
     Button mSaveButton;
     DataHandler DataHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_contact);
-        DataHandler = DataHandler.getInstance(getApplicationContext());
-        mName = findViewById(R.id.eTName);
+
+        setContentView(R.layout.activity_add_contact); //initiating
+        DataHandler = DataHandler.getInstance(getApplicationContext()); //getting the application context
+        mName = findViewById(R.id.eTName); //initiating
         mContactNumber = findViewById(R.id.eTContactNumber);
         mSaveButton = findViewById(R.id.saveButton);
 
@@ -35,16 +36,16 @@ public class AddContact extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveData();
-            }
+            } //calling the save method on button click
         });
     }
 
     //
     private void saveData(){
-        String name = mName.getText().toString();
+        String name = mName.getText().toString(); //getting the text from text fields
         String number = mContactNumber.getText().toString();
-        Contact newItem = new Contact(name, number);
-        DataHandler.AddContact(newItem);
+        Contact newItem = new Contact(name, number); //constructor for contact class and passing the value
+        DataHandler.AddContact(newItem); //passing the data to datahandler class to save it to shared prefrence
 
 
         Toast.makeText(AddContact.this, "Contact Saved", Toast.LENGTH_SHORT).show();

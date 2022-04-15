@@ -17,13 +17,11 @@ public class Contact implements Serializable {
 
     public String getmName() {
         return mName;
-    }
+    } //getter for name
 
     public String getmContact() {
         return mContact;
-    }
-
-
+    }//getter for contact
 
 }
 

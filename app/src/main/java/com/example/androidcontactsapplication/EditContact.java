@@ -29,17 +29,17 @@ public class EditContact extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
 
-       index = getIntent().getIntExtra("index", 0);
-        getIntent().getStringExtra("mName");
+       index = getIntent().getIntExtra("index", 0); //getting the index(of selected contact) which was passed from previous intent
+        getIntent().getStringExtra("mName"); //getting the name which was passed from previous intent
         getIntent().getStringExtra("mContact");
 
-        DataHandler = DataHandler.getInstance(getApplicationContext());
+        DataHandler = DataHandler.getInstance(getApplicationContext()); //getting the application context
 
         mName = findViewById(R.id.eTName);
         mContactNumber = findViewById(R.id.eTContactNumber);
         mUpdateButton = findViewById(R.id.saveButton);
 
-        mName.setText(getIntent().getStringExtra("mName"));
+        mName.setText(getIntent().getStringExtra("mName")); //setting the text in text field from the passed data
         mContactNumber.setText(""+ getIntent().getStringExtra("mContact"));
 
         mUpdateButton.setOnClickListener(new View.OnClickListener() {
@@ -48,15 +48,13 @@ public class EditContact extends AppCompatActivity {
                 EditContact();
             }
         });
-
-
     }
 
     private void EditContact(){
         String name = mName.getText().toString();
         String number = mContactNumber.getText().toString();
         Contact newItem = new Contact(name, number);
-        DataHandler.EditContact(index, newItem);
+        DataHandler.EditContact(index, newItem); //passing the data to datahandler class to save it back after update
 
 
         Toast.makeText(EditContact.this, "Update Successful", Toast.LENGTH_SHORT).show();
@@ -79,7 +77,7 @@ public class EditContact extends AppCompatActivity {
 
       /*_________________________________________
 
-                Adding the Menu Item
+         Adding the Menu Items Edit and delete
       ____________________________________________*/
 
 
@@ -88,15 +86,15 @@ public class EditContact extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_edit:
 
-                mName.setEnabled(true);
+                mName.setEnabled(true); //enabling the fields when user selects update
                 mContactNumber.setEnabled(true);
-                mUpdateButton.setVisibility(View.VISIBLE);
+                mUpdateButton.setVisibility(View.VISIBLE); // showing the update button
 
                 return true;
             case R.id.menu_delete:
-                DataHandler.DeleteContact(index);
-                Toast.makeText(EditContact.this, "Deleted Successful", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(EditContact.this, MainActivity.class);
+                DataHandler.DeleteContact(index); //if delete item is selected (passing the index to datahandler to delete )
+                Toast.makeText(EditContact.this, "Deleted Successful", Toast.LENGTH_SHORT).show(); // if successful shwoing message
+                Intent intent = new Intent(EditContact.this, MainActivity.class); //going back to main
                 startActivity(intent);
                 finish();
                 return true;

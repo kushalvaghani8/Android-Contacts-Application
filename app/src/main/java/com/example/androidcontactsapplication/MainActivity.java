@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DataHandler = DataHandler.getInstance(getApplicationContext());
 
-        mListView = (ListView) findViewById(R.id.listView);
+        mListView = (ListView) findViewById(R.id.listView); //initiating the list view
         mListAdapter = new ListAdapter(this);
-        mListView.setAdapter(mListAdapter);
+        mListView.setAdapter(mListAdapter); //passing the listview adapter to list view
     }
 
     /*_________________________________________
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add:
-                Intent intentAdd = new Intent(this, AddContact.class);
+                Intent intentAdd = new Intent(this, AddContact.class); //menu item (add, when clicked initiating the activity)
                 startActivity(intentAdd);
                 return true;
             default:
