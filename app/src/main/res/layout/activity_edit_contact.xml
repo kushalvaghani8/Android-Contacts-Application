@@ -29,7 +29,6 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:ems="10"
-            android:textColor="@color/black"
             android:inputType="textPersonName"
             android:hint="Name"
             android:autofillHints="John Doe"
@@ -56,7 +55,6 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:ems="10"
-            android:textColor="@color/black"
             android:hint="Contact Number"
             android:inputType="phone"
             tools:ignore="Autofill,HardcodedText" />
