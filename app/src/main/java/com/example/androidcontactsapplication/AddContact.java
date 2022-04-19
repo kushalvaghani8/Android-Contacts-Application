@@ -45,7 +45,7 @@ public class AddContact extends AppCompatActivity {
         String name = mName.getText().toString(); //getting the text from text fields
         String number = mContactNumber.getText().toString();
         Contact newItem = new Contact(name, number); //constructor for contact class and passing the value
-        DataHandler.AddContact(newItem); //passing the data to datahandler class to save it to shared prefrence
+        DataHandler.AddContact(newItem); //passing the data to dataHandler class to save it to shared prefrence
 
 
         Toast.makeText(AddContact.this, "Contact Saved", Toast.LENGTH_SHORT).show();
